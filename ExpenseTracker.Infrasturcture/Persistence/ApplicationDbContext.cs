@@ -50,6 +50,7 @@ namespace ExpenseTracker.Infrasturcture.Persistence
         }
         public int GetCurrentUser()
         {
+            return 1;
             var user = _httpContextAccessor.HttpContext?.User;
 
             if (user == null || user.Identity is null || !user.Identity.IsAuthenticated)

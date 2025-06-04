@@ -38,9 +38,9 @@ namespace ExpenseTracker.Application.Services.Category
 
         public async Task<ApiResponseDto<List<BaseRefDto>>> GetSubCategoryListByParentIdAsync(Guid parentId)
         {
-            var parent = await _unitOfWork.CategoryRepo.TableNoTracking.FirstOrDefaultAsync(x => x.GuidId == parentId);
+            var parentCategoryId = await _unitOfWork.CategoryRepo.GetIdByGuid(parentId);
 
-            if(parent is null)
+            if(parentCategoryId is null)
             {
                 return ApiResponseDto<List<BaseRefDto>>.FailureStatus("Unable to find Sub catergories");
             }
@@ -49,10 +49,11 @@ namespace ExpenseTracker.Application.Services.Category
                         !x.IsDeleted 
                         && x.IsActive 
                         && x.IsSubCategory 
-                        && x.ParentCategory == parent.Id)
+                        && x.ParentCategory == parentCategoryId)
                         .ToListAsync();
 
             return ApiResponseDto<List<BaseRefDto>>.SuccessStatus(list);
         }
+
     }
 }

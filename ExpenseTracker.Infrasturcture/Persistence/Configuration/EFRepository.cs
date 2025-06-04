@@ -71,7 +71,7 @@ namespace ExpenseTracker.Infrasturcture.Persistence.Configuration
                 if (entity == null)
                     throw new ArgumentNullException(nameof(entity));
 
-                _entities.AddAsync(entity);
+                Entities.AddAsync(entity);
             }
             catch (Exception) 
             {
@@ -162,6 +162,22 @@ namespace ExpenseTracker.Infrasturcture.Persistence.Configuration
                 throw;
             }
         }
+        public virtual async Task<int?> GetIdByGuid(Guid guid)
+        {
+            try
+            {
+                int? id = await Entities
+                    .Where(e => EF.Property<Guid>(e, "GuidId") == guid)
+                    .Select(e => EF.Property<int>(e, "Id"))
+                    .FirstOrDefaultAsync();
+
+                return id;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public virtual IEnumerable<TEntity> GetAll()
         {
@@ -194,7 +210,7 @@ namespace ExpenseTracker.Infrasturcture.Persistence.Configuration
                 if (entity == null)
                     throw new ArgumentNullException(nameof(entity));
 
-                _entities.Update(entity);
+                Entities.Update(entity);
             }
             catch (Exception)
             {
