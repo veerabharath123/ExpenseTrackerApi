@@ -7,5 +7,7 @@ namespace ExpenseTracker.Application.Services
     {
         Task<ApiResponseDto<List<ExpenseResponseDto>>> GetUserExpensesAsync();
         Task<ApiResponseDto<bool>> InsertUserExpenseAsync(ExpenseRequestDto request);
+        Task<ApiResponseDto<BarChartRequestDto>> GetWeeklyExpenseAsync();
+        Task<ApiResponseDto<BarChartRequestDto>> GetExpenseFromRangeAsync(DateRangeRequestDto request);
     }
 }

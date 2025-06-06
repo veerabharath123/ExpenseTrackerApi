@@ -23,9 +23,21 @@ namespace ExpenseTracker.Api.Controllers.V1
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> InsertUserExpense(ExpenseRequestDto request)
+        public async Task<IActionResult> InsertUserExpense([FromBody] ExpenseRequestDto request)
         {
             var respones = await _expenseServices.InsertUserExpenseAsync(request);
+            return Ok(respones);
+        }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> GetWeeklyExpense()
+        {
+            var respones = await _expenseServices.GetWeeklyExpenseAsync();
+            return Ok(respones);
+        }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> GetExpenseFromRangeAsync([FromBody] DateRangeRequestDto request)
+        {
+            var respones = await _expenseServices.GetExpenseFromRangeAsync(request);
             return Ok(respones);
         }
     }
