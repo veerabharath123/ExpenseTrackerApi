@@ -36,7 +36,24 @@ namespace ExpenseTracker.Application.Services
 
             return ApiResponseDto<List<ExpenseResponseDto>>.SuccessStatus(expenses);
         }
-        public async Task<ApiResponseDto<BarChartRequestDto>> GetExpenseFromRangeAsync(DateRangeRequestDto request)
+        public async Task<ApiResponseDto<List<ExpenseResponseDto>>> GetUserExpensesOfTodayAsync()
+        {
+            var userId = 1;
+            var expenses = await (from e in _unitOfWork.ExpenseRepo.TableNoTracking
+                                  join c in _unitOfWork.CategoryRepo.TableNoTracking on e.CategoryId equals c.Id
+                                  where userId == e.UserId && e.IsActive && !e.IsDeleted
+                                  select new ExpenseResponseDto
+                                  {
+                                      Name = e.Name,
+                                      Description = e.Description,
+                                      Amount = e.Amount,
+                                      Date = e.Date,
+                                      CategoryName = c.Name
+                                  }).ToListAsync();
+
+            return ApiResponseDto<List<ExpenseResponseDto>>.SuccessStatus(expenses);
+        }
+        public async Task<ApiResponseDto<BarChartRequestDto>> GetExpenseFromDateRangeAsync(DateRangeRequestDto request)
         {
             var userId = 1;
             var expenses = await _unitOfWork.ExpenseRepo.TableNoTracking
@@ -85,7 +102,7 @@ namespace ExpenseTracker.Application.Services
         {
             DateTime today = DateTime.Today, sevenDaysAgo = today.AddDays(-6);
 
-            return await GetExpenseFromRangeAsync(new DateRangeRequestDto { End = today, Start = sevenDaysAgo});
+            return await GetExpenseFromDateRangeAsync(new DateRangeRequestDto { End = today, Start = sevenDaysAgo});
         }
 
         private string GetBackgroundColor(decimal amount) => amount switch

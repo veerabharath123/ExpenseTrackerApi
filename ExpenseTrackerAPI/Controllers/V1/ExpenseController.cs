@@ -21,7 +21,6 @@ namespace ExpenseTracker.Api.Controllers.V1
             var respones = await _expenseServices.GetUserExpensesAsync();
             return Ok(respones);
         }
-
         [HttpPost("[action]")]
         public async Task<IActionResult> InsertUserExpense([FromBody] ExpenseRequestDto request)
         {
@@ -35,9 +34,9 @@ namespace ExpenseTracker.Api.Controllers.V1
             return Ok(respones);
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> GetExpenseFromRangeAsync([FromBody] DateRangeRequestDto request)
+        public async Task<IActionResult> GetExpenseFromDateRange([FromBody] DateRangeRequestDto request)
         {
-            var respones = await _expenseServices.GetExpenseFromRangeAsync(request);
+            var respones = await _expenseServices.GetExpenseFromDateRangeAsync(request);
             return Ok(respones);
         }
     }

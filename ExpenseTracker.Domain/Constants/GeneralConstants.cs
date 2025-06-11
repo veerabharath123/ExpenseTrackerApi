@@ -8,7 +8,7 @@ namespace ExpenseTracker.Domain.Constants
 {
     public class GeneralConstants
     {
-        public const string WEEKLY_EXPENSE_NOTE = "<b>Note: </b> Your total expenses that you spent this week is {0}";
+        public const string WEEKLY_EXPENSE_NOTE = "Your total expenses that you spent this week is {0}";
         public enum DependencyInjectionTypes
         {
             Transient,
