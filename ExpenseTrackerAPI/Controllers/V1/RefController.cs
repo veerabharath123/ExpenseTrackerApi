@@ -1,4 +1,4 @@
-﻿using ExpenseTracker.Application.Services.Category;
+﻿using ExpenseTracker.Application.Services;
 using ExpenseTracker.SharedKernel.Models.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

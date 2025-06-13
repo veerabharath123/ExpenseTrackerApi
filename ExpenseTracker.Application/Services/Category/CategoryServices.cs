@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using ExpenseTracker.Domain.Entites;
 
-namespace ExpenseTracker.Application.Services.Category
+namespace ExpenseTracker.Application.Services
 {
     public class CategoryServices : ICategoryServices
     {

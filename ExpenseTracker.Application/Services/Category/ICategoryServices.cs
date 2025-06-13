@@ -1,7 +1,7 @@
 ﻿using ExpenseTracker.SharedKernel.Models.Common.Class;
 using ExpenseTracker.SharedKernel.Models.Response;
 
-namespace ExpenseTracker.Application.Services.Category
+namespace ExpenseTracker.Application.Services
 {
     public interface ICategoryServices
     {

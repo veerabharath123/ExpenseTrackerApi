@@ -4,7 +4,7 @@ using ExpenseTracker.SharedKernel.Models.Response;
 using Microsoft.EntityFrameworkCore;
 using static ExpenseTracker.Domain.Records.ExpenseRecords;
 using ExpenseTracker.SharedKernel.Models.Request;
-using ExpenseTracker.Application.Services.Category;
+using ExpenseTracker.Application.Services;
 using ExpenseTracker.Application.Common.Class;
 using System.Linq;
 using ExpenseTracker.Domain.Constants;
