@@ -10,7 +10,6 @@ namespace ExpenseTracker.Api.Controllers.V1
     public class RefController : ControllerBase
     {
         private readonly ICategoryServices _categoryServices;
-
         public RefController(ICategoryServices categoryServices)
         {
             _categoryServices = categoryServices;

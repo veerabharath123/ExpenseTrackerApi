@@ -13,5 +13,10 @@ namespace ExpenseTracker.Application.Common.Interface
         DbSet<User> User { get; set; }
         DbSet<Category> Category { get; set; }
         DbSet<Expense> Expense { get; set; }
+        DbSet<Roles> Roles { get; set; }
+        DbSet<UserRoles> UserRoles { get; set; }
+        DbSet<RolePermissions> RolePermissions { get; set; }
+        DbSet<Permissions> Permissions { get; set; }
+
     }
 }

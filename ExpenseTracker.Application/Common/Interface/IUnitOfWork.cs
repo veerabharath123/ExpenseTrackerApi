@@ -12,6 +12,10 @@ namespace ExpenseTracker.Application.Common.Interface
         IRepository<User> UserRepo { get; }
         IRepository<Category> CategoryRepo { get; }
         IRepository<Expense> ExpenseRepo { get; }
+        IRepository<Roles> RolesRepo { get; }
+        IRepository<Permissions> PermissionsRepo { get; }
+        IRepository<RolePermissions> RolePermissionsRepo { get; }
+        IRepository<UserRoles> UserRolesRepo { get; }
 
         Task<bool> SaveAsync();
         Task<int> SaveChangesAsync();

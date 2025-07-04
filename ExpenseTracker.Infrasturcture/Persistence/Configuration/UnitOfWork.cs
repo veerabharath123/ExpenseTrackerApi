@@ -22,6 +22,10 @@ namespace ExpenseTracker.Infrasturcture.Persistence.Configuration
         private IRepository<User> _userRepo;
         private IRepository<Category> _categoryRepo;
         private IRepository<Expense> _expenseRepo;
+        private IRepository<Roles> _rolesRepo;
+        private IRepository<Permissions> _permissionsRepo;
+        private IRepository<RolePermissions> _rolePermissionsRepo;
+        private IRepository<UserRoles> _userRolesRepo;
 
         #endregion private repositories
 
@@ -48,6 +52,39 @@ namespace ExpenseTracker.Infrasturcture.Persistence.Configuration
             {
                 _expenseRepo ??= new EFRepository<Expense>(_context);
                 return _expenseRepo;
+            }
+        }
+
+        public IRepository<Roles> RolesRepo
+        {
+            get
+            {
+                _rolesRepo ??= new EFRepository<Roles>(_context);
+                return _rolesRepo;
+            }
+        }
+        public IRepository<Permissions> PermissionsRepo
+        {
+            get
+            {
+                _permissionsRepo ??= new EFRepository<Permissions>(_context);
+                return _permissionsRepo;
+            }
+        }
+        public IRepository<RolePermissions> RolePermissionsRepo
+        {
+            get
+            {
+                _rolePermissionsRepo ??= new EFRepository<RolePermissions>(_context);
+                return _rolePermissionsRepo;
+            }
+        }
+        public IRepository<UserRoles> UserRolesRepo
+        {
+            get
+            {
+                _userRolesRepo ??= new EFRepository<UserRoles>(_context);
+                return _userRolesRepo;
             }
         }
         #endregion public repositories

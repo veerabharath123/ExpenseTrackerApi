@@ -38,5 +38,13 @@ namespace ExpenseTracker.Api.Controllers.V1
             var response = await _userServices.InsertUserAsync(request);
             return Ok(response);
         }
+
+        [AllowAnonymous]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
+        {
+            var response = await _userServices.ValidateUserLoginAsync(request);
+            return Ok(response);
+        }
     }
 }

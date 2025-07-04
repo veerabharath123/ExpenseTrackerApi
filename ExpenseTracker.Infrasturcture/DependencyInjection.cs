@@ -1,6 +1,8 @@
 ﻿using ExpenseTracker.Application.Common.Interface;
+using ExpenseTracker.Infrasturcture.Jwt;
 using ExpenseTracker.Infrasturcture.Persistence;
 using ExpenseTracker.Infrasturcture.Persistence.Configuration;
+using ExpenseTracker.SharedKernel.Models.Common.Class;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,12 +27,12 @@ namespace ExpenseTracker.Infrasturcture
             services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMemoryCache();
-
+            services.Configure<JwtConfigDto>(configuration.GetSection("JwtAuth"));
             return services;
         }
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            
+            services.AddScoped<IJwtTokenServices, JwtTokenServices>();
             return services;
         }
     }

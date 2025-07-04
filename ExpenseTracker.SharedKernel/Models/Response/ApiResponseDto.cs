@@ -30,6 +30,10 @@ namespace ExpenseTracker.SharedKernel.Models.Response
         {
             return new ApiResponseDto<T>(200,default, message, false);
         }
+        public static ApiResponseDto<T> FailureStatus(string message, params string[] messageParams)
+        {
+            return new ApiResponseDto<T>(200, default, string.Format(message,messageParams), false);
+        }
         public static ApiResponseDto<T> CustomStatus(int statusCode, bool success,T result, string message)
         {
             return new ApiResponseDto<T>(statusCode, result, message, success);

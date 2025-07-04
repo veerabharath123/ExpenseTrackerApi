@@ -4,6 +4,7 @@ using ExpenseTracker.Application;
 using ExpenseTracker.Domain.Constants;
 using ExpenseTracker.Infrasturcture;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -27,8 +28,8 @@ namespace ExpenseTracker.Api.Registrations
             })
             .AddJwtBearer(x => ApplyJwtBearerOptions(x, builder.Configuration));
 
-            builder.Services.AddExceptionHandler<AppExceptionHandler>();
-            builder.Services.AddControllers(options =>
+            builder.Services.AddExceptionHandler<AppExceptionHandler>()
+            .AddControllers(options =>
             {
                 options.Filters.Add<ValidationModelAttribute>();
             })
@@ -36,15 +37,16 @@ namespace ExpenseTracker.Api.Registrations
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
-
-            
+            builder.Services
+                .AddEndpointsApiExplorer()
+                .AddApplication()
+                .AddInfrastructure(builder.Configuration)
+                .AddSingleton<IAuthorizationHandler, DbPermissionHandler>();
         }
         private static void ApplyJwtBearerOptions(JwtBearerOptions options, ConfigurationManager configuration)
         {
-            var signInKey = configuration["JwtAuth:SignInKey"] ?? string.Empty;
-            var tokenKey = configuration["JwtAuth:TokenKey"] ?? string.Empty;
+            var signInKey = configuration["JwtAuth:SigningKey"] ?? string.Empty;
+            var tokenKey = configuration["JwtAuth:EncryptKey"] ?? string.Empty;
 
             options.RequireHttpsMetadata = false;
             options.SaveToken = true;
